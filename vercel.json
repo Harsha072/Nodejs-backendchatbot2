@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "build": [
+        {
+            "src": "./app.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/index.js"
+        },
+        {
+            "src": "/api/requestText",
+            "methods": [
+                "POST"
+            ],
+            "dest": "/index.js"
+        },
+        {
+            "src": "/api/quiz",
+            "methods": [
+                "GET"
+            ],
+            "dest": "/index.js"
+        }
+    ]
+}
