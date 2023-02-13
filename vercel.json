@@ -2,29 +2,29 @@
     "version": 2,
     "builds": [
         {
-            "src": "./app.js",
-            "use": "@vercel/node"
+            "src": "app.js",
+            "use": "@now/node"
         }
     ]
     ,
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "/index.js"
+            "dest": "index.js"
         },
         {
             "src": "/api/requestText",
             "methods": [
                 "POST"
             ],
-            "dest": "/index.js"
+            "dest": "index.js"
         },
         {
             "src": "/api/quiz",
             "methods": [
                 "GET"
             ],
-            "dest": "/index.js"
+            "dest": "index.js"
         }
     ]
 }
