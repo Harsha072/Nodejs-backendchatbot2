@@ -28,64 +28,64 @@ try{
     );
     
 
-const intentRequest = {
-    session: sessionPath,
-    queryInput: {
-    text: {
-        // The query to send to the dialogflow agent
-        text: requestText,
-        // The language used by the client (en-US)
-        languageCode: 'en-US',
-    },
-    },
-};
+// const intentRequest = {
+//     session: sessionPath,
+//     queryInput: {
+//     text: {
+//         // The query to send to the dialogflow agent
+//         text: requestText,
+//         // The language used by the client (en-US)
+//         languageCode: 'en-US',
+//     },
+//     },
+// };
 
-const intentRequestIntro = {
-    session: sessionPath,
-    queryInput: {
-        event:{
-         name:event,
-         languageCode: 'en-US',
-        },
-    text: {
-        // The query to send to the dialogflow agent
-        text: requestText,
-        // The language used by the client (en-US)
-        languageCode: 'en-US',
-    },
-    },
-};
+// const intentRequestIntro = {
+//     session: sessionPath,
+//     queryInput: {
+//         event:{
+//          name:event,
+//          languageCode: 'en-US',
+//         },
+//     text: {
+//         // The query to send to the dialogflow agent
+//         text: requestText,
+//         // The language used by the client (en-US)
+//         languageCode: 'en-US',
+//     },
+//     },
+// };
 
-// // The text query request.
-// // Send request and log result
+// // // The text query request.
+// // // Send request and log result
 
-if(event){
-    const responses = await sessionClient.detectIntent(intentRequestIntro);
-console.log(responses[0].queryResult.fulfillmentMessages[0].payload)
-const result = responses[0].queryResult;
-console.log(responses[0].responseId)
-return await {
+// if(event){
+//     const responses = await sessionClient.detectIntent(intentRequestIntro);
+// console.log(responses[0].queryResult.fulfillmentMessages[0].payload)
+// const result = responses[0].queryResult;
+// console.log(responses[0].responseId)
+// return await {
         
-    "id":responses[0].responseId,
-    "Query": result.queryText,
-    "Response": result.fulfillmentText,
-    "Intent": result.intent.displayName
-};
-}
-else{
-    const responses = await sessionClient.detectIntent(intentRequest);
+//     "id":responses[0].responseId,
+//     "Query": result.queryText,
+//     "Response": result.fulfillmentText,
+//     "Intent": result.intent.displayName
+// };
+// }
+// else{
+//     const responses = await sessionClient.detectIntent(intentRequest);
     
-    console.log(responses[0].queryResult)
-    const result = responses[0].queryResult;
-    console.log(responses[0].responseId)
-    return await {
+//     console.log(responses[0].queryResult)
+//     const result = responses[0].queryResult;
+//     console.log(responses[0].responseId)
+//     return await {
         
-        "id":responses[0].responseId,
-        "Query": result.queryText,
-        "Response": result.fulfillmentText,
-        "Intent": result.intent.displayName
-    };
-}
+//         "id":responses[0].responseId,
+//         "Query": result.queryText,
+//         "Response": result.fulfillmentText,
+//         "Intent": result.intent.displayName
+//     };
+// }
 
 }
 catch(error){
