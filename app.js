@@ -37,7 +37,7 @@ if (!isProduction) {
     app.use(errorhandler());
   }
   
-  app.use("/api", index);
+  app.use("/api/", index);
   
   /// catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -59,7 +59,7 @@ if (!isProduction) {
   // finally, let's start our server...
   var server = app.listen( process.env.PORT || 3000, function(){
     console.log('Listening on port harsha ' + server.address().port);
-    console.log("dialogflow project ",process.env.DIALOGFLOW_PROJECT_ID)
+    console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
   });
 
 

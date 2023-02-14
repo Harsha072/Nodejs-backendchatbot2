@@ -3,7 +3,9 @@ var router = require('express').Router();
 const axios = require('axios');
 var runIntent = require("../controller/dialogFlow").runIntent;
 
-router.post("/requestText", function(req, res){
+try{
+  console.log("inside try::::")
+  router.post("/requestText", function(req, res){
     // var intentRequest = createSessionPath(req.params.projectId);
     (async() => {
         console.log("request body :: ",req.body)
@@ -11,7 +13,7 @@ router.post("/requestText", function(req, res){
          console.log("the result",result)
         return res.send(
           {
-              "response":"activejgjhgk"
+              "response":"activejgjhgkdfhgdfhgfdn"
           });
       
   })()
@@ -42,5 +44,10 @@ router.get('/quiz', async (req, res) => {
     }
   });
   
+}
+catch(error){
+
+}
+
 
 module.exports = router;
