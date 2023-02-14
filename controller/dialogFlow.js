@@ -60,7 +60,9 @@ const intentRequestIntro = {
 // // Send request and log result
 
 if(event){
+    console.log("event is there:::: ")
     const responses = await sessionClient.detectIntent(intentRequestIntro);
+    console.log("after event is there:::: ")
 console.log(responses[0].queryResult.fulfillmentMessages[0].payload)
 const result = responses[0].queryResult;
 console.log(responses[0].responseId)
@@ -73,8 +75,9 @@ return await {
 };
 }
 else{
+    console.log("else event is not there:::: ")
     const responses = await sessionClient.detectIntent(intentRequest);
-    
+    console.log("afetr else event is there:::: ")
     console.log(responses[0].queryResult)
     const result = responses[0].queryResult;
     console.log(responses[0].responseId)
