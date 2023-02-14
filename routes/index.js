@@ -5,7 +5,7 @@ var runIntent = require("../controller/dialogFlow").runIntent;
 
 try{
   console.log("inside try::::")
-  router.post("/requestText", function(req, res){
+  router.get("/requestText", function(req, res){
     // var intentRequest = createSessionPath(req.params.projectId);
     (async() => {
         console.log("request body :: ",req.body)
