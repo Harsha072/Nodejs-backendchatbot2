@@ -7,11 +7,11 @@ router.post("/requestText", function(req, res){
     // var intentRequest = createSessionPath(req.params.projectId);
     (async() => {
         console.log("request body :: ",req.body)
-        var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
-        console.log("the result",result)
+        // var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
+        // console.log("the result",result)
         return res.send(
           {
-              "response":"active"
+              "response":"activejgjhgk"
           });
       
   })()
