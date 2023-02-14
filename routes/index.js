@@ -9,23 +9,23 @@ router.post("/requestText", function(req, res){
         console.log("request body :: ",req.body)
         var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
         console.log("the result",result)
-  //       return res.send(
-  //         {
-  //             "response":"active"
-  //         });
+        return res.send(
+          {
+              "response":"active"
+          });
       
-  // })()
+  })()
         // var result = await runIntent('test2-tsgl', 'hi')
        
-        return res.send(
-            {
-                "id":result.id,
-                "responseMessage": result.Response,
-                "originalQuery": result.Query,
-                "intent": result.Intent
-            });
+    //     return res.send(
+    //         {
+    //             "id":result.id,
+    //             "responseMessage": result.Response,
+    //             "originalQuery": result.Query,
+    //             "intent": result.Intent
+    //         });
         
-    })()
+    // })()
 
 });
 //'https://opentdb.com/api.php?amount=10'
