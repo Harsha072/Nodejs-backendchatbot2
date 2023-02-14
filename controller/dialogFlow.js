@@ -89,7 +89,7 @@ else{
 
 }
 catch(error){
-    console.log("the error")
+    console.log("the error",error)
 
 }
 
