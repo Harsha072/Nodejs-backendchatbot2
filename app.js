@@ -17,8 +17,22 @@ var isProduction = process.env.NODE_ENV === 'production';
 
 // Create global app object
 var app = express();
-
-app.use(cors());
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests from localhost
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) {
+      callback(null, true);
+    }
+    // allow requests from your production domain
+    else if (origin === 'https://chatbot-1trd.onrender.com') {
+      callback(null, true);
+    }
+    // otherwise, reject the request
+    else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 // Normal express config defaults
 app.use(require('morgan')('dev'));
