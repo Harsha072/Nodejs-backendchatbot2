@@ -11,7 +11,7 @@ var express = require('express'),
  * Send a query to the dialogflow agent, and return the query result.
  * @param {string} projectId The project to be used
  */
-
+app.use("/api/", index);
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -51,9 +51,9 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-app.use("/api/", index);
+
 app.get("/test", (req, res) => {
-  console.log("test",index)
+  
   res.send("<h1>It's working 🤗</h1>")
 })
 /// catch 404 and forward to error handler
