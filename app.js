@@ -53,7 +53,7 @@ if (!isProduction) {
 
 app.use("/api/", index);
 app.get("/test", (req, res) => {
-  console.log("test")
+  console.log("test",index)
   res.send("<h1>It's working 🤗</h1>")
 })
 /// catch 404 and forward to error handler
