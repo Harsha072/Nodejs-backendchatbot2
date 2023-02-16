@@ -34,7 +34,7 @@ var app = express();
 //   }
 // }));
 
-app.use(cors)
+// app.use(cors)
 
 // Normal express config defaults
 app.use(require('morgan')('dev'));
