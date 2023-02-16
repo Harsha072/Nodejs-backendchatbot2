@@ -1,22 +1,89 @@
+const http = require('http');
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    cors = require('cors'),
+    errorhandler = require('errorhandler'),
+    // dialogflowIndex = require("./controller");
+    index = require('./routes/index');
+    var app = express();
+/**
+ * Send a query to the dialogflow agent, and return the query result.
+ * @param {string} projectId The project to be used
+ */
+
+app.use(require('morgan')('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(require('method-override')());
+app.use(express.static(__dirname + '/public'));
+var isProduction = process.env.NODE_ENV === 'production';
+
+// Create global app object
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "https://chatbot-1trd.onrender.com");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     // allow requests from localhost or your production domain
+//     if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'https://chatbot-1trd.onrender.com') {
+//       callback(null, true);
+//     }
+//     // otherwise, reject the request
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// }));
+
+// app.use(cors)
+
+// Normal express config defaults
 
 
-const express = require('express')
-const morgan = require('morgan')
+// app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
+if (!isProduction) {
+  app.use(errorhandler());
+}
 
-const app = express()
-
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
-
-// https://gist.githubusercontent.com/meech-ward/1723b2df87eae8bb6382828fba649d64/raw/ee52637cc953df669d95bb4ab68ac2ad1a96cd9f/lotr.sql
-
+// app.use("/api/", index);
 app.get("/test", (req, res) => {
+  console.log("test")
   res.send("<h1>It's working 🤗</h1>")
 })
+/// catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
+
+// production error handler
+// no stacktraces leaked to user
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.json({'errors': {
+//     message: err.message,
+//     error: {}
+//   }});
+// });
+
+// finally, let's start our server...
+var server = app.listen(process.env.PORT || 3000, function(){
+  console.log('Listening on port harsha ' + server.address().port);
+  console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
+});
 
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Listening on port harsha ${port}`))
+
+
+
+
 
 
 
