@@ -12,19 +12,14 @@ var express = require('express'),
  * @param {string} projectId The project to be used
  */
 
-
 var isProduction = process.env.NODE_ENV === 'production';
 
 // Create global app object
 var app = express();
 app.use(cors({
   origin: function(origin, callback) {
-    // allow requests from localhost
-    if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) {
-      callback(null, true);
-    }
-    // allow requests from your production domain
-    else if (origin === 'https://chatbot-1trd.onrender.com') {
+    // allow requests from localhost or your production domain
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'https://chatbot-1trd.onrender.com/') {
       callback(null, true);
     }
     // otherwise, reject the request
@@ -47,36 +42,31 @@ app.use(express.static(__dirname + '/public'));
 if (!isProduction) {
   app.use(errorhandler());
 }
-if (!isProduction) {
-    app.use(errorhandler());
-  }
-  
-  app.use("/api/", index);
-  
-  /// catch 404 and forward to error handler
-  app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
-  
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({'errors': {
-      message: err.message,
-      error: {}
-    }});
-  });
-  
-  // finally, let's start our server...
-  var server = app.listen( process.env.PORT || 3000, function(){
-    console.log('Listening on port harsha ' + server.address().port);
-    console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
-  });
 
+app.use("/api/", index);
 
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.json({'errors': {
+    message: err.message,
+    error: {}
+  }});
+});
+
+// finally, let's start our server...
+var server = app.listen(process.env.PORT || 3000, function(){
+  console.log('Listening on port harsha ' + server.address().port);
+  console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
+});
 
 
 
