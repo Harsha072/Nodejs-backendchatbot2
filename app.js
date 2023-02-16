@@ -11,7 +11,7 @@ var express = require('express'),
  * Send a query to the dialogflow agent, and return the query result.
  * @param {string} projectId The project to be used
  */
-app.use("/api/", index);
+
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(require('method-override')());
 app.use(express.static(__dirname + '/public'));
 var isProduction = process.env.NODE_ENV === 'production';
-
+app.use("/api/", index);
 // Create global app object
 
 // app.use(function(req, res, next) {
@@ -51,9 +51,9 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-
+ 
 app.get("/test", (req, res) => {
-  
+  console.log("test")
   res.send("<h1>It's working 🤗</h1>")
 })
 /// catch 404 and forward to error handler
@@ -78,78 +78,3 @@ var server = app.listen(process.env.PORT || 8080, function(){
   console.log('Listening on port harsha ' + server.address().port);
   console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function runSample(projectId) {
-//   // A unique identifier for the given session
-//   const sessionId = uuid.v4();
-
-//   // Create a new session
-//   const sessionClient = new dialogflow.SessionsClient();
-//   const sessionPath = sessionClient.projectAgentSessionPath(
-//     projectId,
-//     sessionId
-//   );
-
-//   // The text query request.
-//   const request = {
-//     session: sessionPath,
-//     queryInput: {
-//       text: {
-//         // The query to send to the dialogflow agent
-//         text: 'hello',
-//         // The language used by the client (en-US)
-//         languageCode: 'en-US',
-//       },
-//     },
-//   };
-
-//   // Send request and log result
-//   const responses = await sessionClient.detectIntent(request);
-//   console.log('Detected intent',responses[0].queryResult.fulfillmentMessages);
-//   const result = responses[0].queryResult;
-//   console.log(`  Query: ${result.queryText}`);
-//   console.log(`  Response: ${result.fulfillmentText}`);
-//   if (result.intent) {
-//     console.log(`  Intent: ${result.intent.displayName}`);
-//   } else {
-//     console.log('  No intent matched.');
-//   }
-// }
-// // await runSample('test2-tsgl')
-// server.listen(port,async () => {
-//     await runSample('test2-tsgl')
-//     console.log(`Server running at http://localhost:${port}/`);
-//   });

@@ -9,21 +9,30 @@ try{
     // var intentRequest = createSessionPath(req.params.projectId);
     (async() => {
         console.log("request body :: ",req.body)
-        var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
-         console.log("the result",result)
+        // var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
+        //  console.log("the result",result)
        
-        return res.send(
-            {
-                "id":result.id,
-                "responseMessage": result.Response,
-                "originalQuery": result.Query,
-                "intent": result.Intent
-            });
+    //     return res.send(
+    //         {
+    //             "id":result.id,
+    //             "responseMessage": result.Response,
+    //             "originalQuery": result.Query,
+    //             "intent": result.Intent
+    //         });
         
-    })()
+    // })()
+
+    return res.send(
+      {
+          "id":"hello"
+         
+      });
+  
+})()
+
 
 });
-//'https://opentdb.com/api.php?amount=10'
+
 router.get('/quiz', async (req, res) => {
     try {
         const response = await axios.get('https://the-trivia-api.com/api/questions?categories=history,science,geography,sport_and_leisure&limit=5&region=IN&difficulty=hard');
