@@ -28,7 +28,11 @@ app.use(cors({
     }
   }
 }));
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://chatbot-1trd.onrender.com/");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // Normal express config defaults
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
