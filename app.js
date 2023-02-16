@@ -51,7 +51,9 @@ if (!isProduction) {
 }
 
 app.use("/api/", index);
-
+app.get("/test", (req, res) => {
+  res.send("<h1>It's working 🤗</h1>")
+})
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
