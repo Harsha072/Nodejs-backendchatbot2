@@ -2,7 +2,9 @@
 var router = require('express').Router();
 const axios = require('axios');
 var runIntent = require("../controller/dialogFlow").runIntent;
-
+app.get("/test", (req, res) => {
+  res.send("<h1>It's working 🤗</h1>")
+})
 try{
   console.log("inside try::::")
   router.post("/requestText", function(req, res){
