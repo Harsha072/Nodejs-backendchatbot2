@@ -11,7 +11,7 @@ var express = require('express'),
  * Send a query to the dialogflow agent, and return the query result.
  * @param {string} projectId The project to be used
  */
-
+app.use(cors())
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 });
 
 
-// app.use(cors)
+
 
 // Normal express config defaults
 
