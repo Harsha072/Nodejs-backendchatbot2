@@ -1,13 +1,40 @@
 // ./{root_folder}/routes/api/index.js
 var router = require('express').Router();
 const axios = require('axios');
+// const { Credential } = require("@aws-sdk/types");
+const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm"); // ES Modules import
 var runIntent = require("../controller/dialogFlow").runIntent;
 
+
+
+// const accessKeyId = "ASIARFTZFSZJVZIC5SFD";
+// const secretAccessKey = "bru19wARZVTuHS4GLficEE9KbgPVDkbK54puD7Oo";
+
+// const credentials = new Credential(accessKeyId, secretAccessKey);
+
+const ssmClient = new SSMClient({
+  region: "us-east-1",
+  credentials: {
+    accessKeyId:"ASIARFTZFSZJVZIC5SFD",
+    secretAccessKey:"bru19wARZVTuHS4GLficEE9KbgPVDkbK54puD7Oo",
+    sessionToken:"FwoGZXIvYXdzENz//////////wEaDAoOmghHfCWWW3cWrSLCAb7kuLnRufTqqXxsWRwrCYIeaTON/xqmyJbo1SpEsRsfm897tKxaBDN/Mm+OLuN8s1bRpbRGIbLQop/hl0NqGGJjrNncx2v8/SFHaRb3mCysyMw6BJD6VxuKNFOKHuYxP9YgpsGq9HaWeGodqaO8tHd2cStXOgpxFqGTT3J2JCsDNZtrp8CwTPSB4JQ+pQ3yd76IupXKhDbKfQQJXxVM32iAMs/+SOwFzSSDi8K9sVMtHO24pqqq3j2EGcBJ/OSqhkUYKO2Vv58GMi38sztcnspMm7FPZkVfZzkWgsqOKlHs5pjts98H9AvKlEFMfx9rycTwdRZO/Rg="
+  },
+});
+
 try{
+  const params = {
+    Name: "/my-app/dialogflow/clientEmail",
+  };
+ 
+  
   console.log("inside try::::")
   router.post("/requestText", function(req, res){
-    // var intentRequest = createSessionPath(req.params.projectId);
+
+   
     (async() => {
+      const command = new GetParameterCommand(params);
+      const data = await ssmClient.send(command);
+  console.log("got data:::::  ",data.Parameter.Value);
         console.log("request body :: ",req.body)
         var result = await runIntent(process.env.DIALOGFLOW_PROJECT_ID, req.body.requestText,req.body.name);
          console.log("the result",result)

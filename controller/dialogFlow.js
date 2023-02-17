@@ -10,7 +10,7 @@ const sessionId = uuid.v4();
 async function runIntent(projectId, requestText,event) {
 // A unique identifier for the given session
 console.log("hello")
-console.log(projectId,requestText,event,process.env.DIALOGFLOW_PRIVATE_KEY,process.env.DIALOGFLOW_CLIENT_EMAIL)
+// console.log(projectId,requestText,event,process.env.DIALOGFLOW_PRIVATE_KEY,process.env.DIALOGFLOW_CLIENT_EMAIL)
 try{
 
     let config = {

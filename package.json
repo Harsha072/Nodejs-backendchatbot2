@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-ssm": "^3.272.0",
+    "@aws-sdk/types": "^3.272.0",
     "@google-cloud/dialogflow": "^4.7.0",
     "@okta/jwt-verifier": "^2.1.0",
     "@types/cors": "^2.8.10",
