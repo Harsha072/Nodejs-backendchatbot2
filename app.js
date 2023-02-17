@@ -22,11 +22,6 @@ var isProduction = process.env.NODE_ENV === 'production';
 app.use("/api/", index);
 // Create global app object
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://chatbot-1trd.onrender.com");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests from localhost or your production domain
@@ -39,6 +34,13 @@ app.use(cors({
     }
   }
 }));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://chatbot-1trd.onrender.com");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 // app.use(cors)
 
