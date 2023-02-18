@@ -12,7 +12,7 @@ const sessionId = uuid.v4();
 async function runIntent(projectId, requestText,event) {
     const [Dkey, Demail]= await someFunction()
 // A unique identifier for the given session
-console.log("hello",projectId,Demail);
+console.log("hello",projectId,Demail,Dkey);
 const privateKeyString = Dkey
 const privateKeyBuffer = Buffer.from(privateKeyString, 'utf8');
 try{
@@ -65,9 +65,9 @@ const intentRequestIntro = {
 // // Send request and log result
 
 if(event){
-    console.log("event is there:::: ",intentRequestIntro)
+   
     const responses = await sessionClient.detectIntent(intentRequestIntro);
-    console.log("after event is there:::: ")
+  
 console.log(responses[0].queryResult.fulfillmentMessages[0].payload)
 const result = responses[0].queryResult;
 console.log(responses[0].responseId)
@@ -80,9 +80,9 @@ return await {
 };
 }
 else{
-    console.log("else event is not there harsha:::: ",intentRequest)
+   
     const responses = await sessionClient.detectIntent(intentRequest);
-    console.log("afetr else event is there harsha:::: ")
+  
     console.log(responses[0].queryResult)
     const result = responses[0].queryResult;
     console.log(responses[0].responseId)
