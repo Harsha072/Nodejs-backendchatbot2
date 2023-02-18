@@ -1,4 +1,6 @@
 const http = require('http');
+
+const config = require("./config")
 var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
@@ -6,11 +8,14 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     // dialogflowIndex = require("./controller");
     index = require('./routes/index');
+    
     var app = express();
 /**
  * Send a query to the dialogflow agent, and return the query result.
- * @param {string} projectId The project to be used
+ * 
  */
+
+
 app.use(cors())
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -78,5 +83,9 @@ app.use(function(err, req, res, next) {
 // finally, let's start our server...
 var server = app.listen(process.env.PORT || 8080, function(){
   console.log('Listening on port harsha ' + server.address().port);
-  console.log("dialogflow project harsha ",process.env.DIALOGFLOW_PROJECT_ID)
+  config.someFunction()
+    
+  
+
 });
+
