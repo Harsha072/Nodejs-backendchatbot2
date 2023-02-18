@@ -12,11 +12,9 @@ const sessionId = uuid.v4();
  */
 async function runIntent(projectId, requestText,event) {
     const [Dkey, Demail]= await someFunction()
-// A unique identifier for the given session
-console.log("hello",projectId,Demail,Dkey);
+
 var newKey = Dkey.replace(/\\n/g, '\n').trim()
 
-console.log("new key ",newKey);
 
 try{
 
