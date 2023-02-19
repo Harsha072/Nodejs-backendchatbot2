@@ -16,7 +16,7 @@ var express = require('express'),
  */
 
 
-app.use(cors())
+// app.use(cors())
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,24 +27,24 @@ var isProduction = process.env.NODE_ENV === 'production';
 app.use("/api/", index);
 // Create global app object
 
-app.use(cors({
-  origin: function(origin, callback) {
-    // allow requests from localhost or your production domain
-    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
-      callback(null, true);
-    }
-    // otherwise, reject the request
-    else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     // allow requests from localhost or your production domain
+//     if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
+//       callback(null, true);
+//     }
+//     // otherwise, reject the request
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// }));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://chatbot-appv1.s3-website-us-east-1.amazonaws.com");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://chatbot-appv1.s3-website-us-east-1.amazonaws.com");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 
 
