@@ -30,7 +30,7 @@ app.use("/api/", index);
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests from localhost or your production domain
-    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'https://chatbot-1trd.onrender.com') {
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'ec2-3-236-19-138.compute-1.amazonaws.com') {
       callback(null, true);
     }
     // otherwise, reject the request
@@ -41,15 +41,13 @@ app.use(cors({
 }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://chatbot-1trd.onrender.com");
+  res.header("Access-Control-Allow-Origin", "ec2-3-236-19-138.compute-1.amazonaws.com");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
 
 
-
-// Normal express config defaults
 
 
 // app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
@@ -84,8 +82,6 @@ app.use(function(err, req, res, next) {
 var server = app.listen(process.env.PORT || 8080, function(){
   console.log('Listening on port harsha ' + server.address().port);
   config.someFunction()
-    
-  
 
 });
 
