@@ -30,7 +30,7 @@ app.use("/api/", index);
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests from localhost or your production domain
-    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'ec2-3-236-19-138.compute-1.amazonaws.com') {
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
       callback(null, true);
     }
     // otherwise, reject the request
@@ -41,7 +41,7 @@ app.use(cors({
 }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "ec2-3-236-19-138.compute-1.amazonaws.com");
+  res.header("Access-Control-Allow-Origin", "http://chatbot-appv1.s3-website-us-east-1.amazonaws.com");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
