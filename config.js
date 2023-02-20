@@ -1,6 +1,16 @@
 const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm");
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
+const ssmClient = new SSMClient({
+  region: "us-east-1",
+  credentials: {
+    accessKeyId: "ASIARFTZFSZJVMDKYQMC",
+    secretAccessKey: "nnpcOyLXzK2flPtcvvYhKuFXlDOCHsgp8AIZfRa3",
+    sessionToken: "FwoGZXIvYXdzEB0aDP7GyC9U0LSEMRnyKyLCAexCn2J5D1LRhALviWzag7ZnwQE1Sgd8WpL7l+inO8h1NqxhO7tWOECa0h+0jLnIIKTSqCs4uciHfNyYQ8oSVL4ASqOETueYDRVQmZ7M5zBQPFESolWu4AAVEBoUHrxmWHW4+keFRrMJG0dzLkZHkHUqvRLTs7QISv2PrSfpeO7Rk/t4r09EbV5DqzStAwsoGYOd+wfT//BLii3j+tJm6cfpQDzonIucIMIZSbPE+/Ov9l1vaErE6sZsVitj2ToNLj3hKNKpzZ8GMi0VN0OAHAdrUi+PQEYSBRgA8kTiEgpWSh0h14P8UVrwduMqR9dK7aBNZNIGoBA="
+  },
+});
 module.exports = {
+  
     someFunction: async function() {
         console.log("calling some function")
         const clientEmail = {
@@ -14,16 +24,9 @@ module.exports = {
           const projectId = {
             Name: "/my-app/dialogflow/projectId"
           }
-          const ssmClient = new SSMClient({ region: "us-east-1" });
+          // const ssmClient = new SSMClient({ region: "us-east-1" });
       
-        // const ssmClient = new SSMClient({
-        //   region: "us-east-1",
-        //   credentials: {
-        //     accessKeyId: "ASIARFTZFSZJ4FZNHHUB",
-        //     secretAccessKey: "RqEExNB/aK4r1vVJFqd2Rji6J1H0SljvPKXYFOhL",
-        //     sessionToken: "FwoGZXIvYXdzEO3//////////wEaDKZOpdpHyowodSWZsSLCAUkaBPkUmAR/A9YodfphuvOFtfaToU+UHElaXRDHuU5VV+opsZP/+kxS1XlMdZkC7D9+b5ZEwrmtYOeVqjVfvY5d/22Nb+N56kKkKt7ASlY27QN14T7U0B0N91SqZZCW0y8lFaukC/hwouuGEKZHbEmiIaouks5tsMwqt1zQR8iCi9cRfiIexLUwSZSyXlqDAjv8QdheNnAT+EgpEC5LFK394WoioHzOcOJBHgJhkrRz95lxW3enBVCUigk1wm6KP2REKOjpwp8GMi0I9tr8e5gix41Px+rZzNKUwfHodhTucLDwkCZZ0Dbwy3IuJUDGX03QW5xX87s="
-        //   },
-        // });
+        
         const command1 = new GetParameterCommand(clientEmail);
         const email = await ssmClient.send(command1);
        var Demail=email.Parameter.Value
@@ -39,6 +42,30 @@ module.exports = {
     
     
       return [Dkey,Demail,id];
+    },
+    connectDb: async function() {
+      const dbUsername = {
+        Name: "/my-app/dialogflow/clientEmail"
+      };
+      const dbPassword = {
+        Name: "/my-app/dialogflow/clientEmail"
+      };
+      const command1 = new GetParameterCommand(dbUsername);
+        const user_name = await ssmClient.send(command1);
+       var username=user_name.Parameter.Value
+
+       const command2 = new GetParameterCommand(dbPassword);
+       const pwd = await ssmClient.send(command1);
+      var password=pwd.Parameter.Value
+    
+      const uri = `mongodb+srv://${username}:${password}@quizcluster.qbwazlw.mongodb.net/?retryWrites=true&w=majority`;
+      const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+      client.connect(err => {
+        const collection = client.db("Quiz-chatbot").collection("Quiz Collection");
+        console.log("db connection succesfull")
+        client.close();
+      });
+
     }
   }
 
