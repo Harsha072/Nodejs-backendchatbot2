@@ -1,6 +1,7 @@
 const http = require('http');
 
 const config = require("./config")
+const db = require("./db")
 var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
@@ -10,27 +11,11 @@ var express = require('express'),
     index = require('./routes/index');
     
     var app = express();
-/**
- * Send a query to the dialogflow agent, and return the query result.
- * 
- */
-
-
-// app.use(cors())
-app.use(require('morgan')('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use(require('method-override')());
-app.use(express.static(__dirname + '/public'));
-var isProduction = process.env.NODE_ENV === 'production';
-app.use("/api/", index);
-// Create global app object
 
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests from localhost or your production domain
-    if (/^https?:\/\/localhost(:\d+)?$/.test(origin) || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
+    if (origin==='http://localhost:4200' || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
       callback(null, true);
     }
     // otherwise, reject the request
@@ -41,12 +26,27 @@ app.use(cors({
 }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://chatbot-appv1.s3-website-us-east-1.amazonaws.com");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  const origin = req.headers.origin;
+  if (origin === 'http://localhost:4200') { 
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  } else if (origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {
+    res.header("Access-Control-Allow-Origin", "http://chatbot-appv1.s3-website-us-east-1.amazonaws.com");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  }
   next();
 });
 
 
+
+app.use(require('morgan')('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(require('method-override')());
+app.use(express.static(__dirname + '/public'));
+var isProduction = process.env.NODE_ENV === 'production';
+app.use("/api/", index);
 
 
 
@@ -82,7 +82,7 @@ app.use(function(err, req, res, next) {
 var server = app.listen(process.env.PORT || 8080, function(){
   console.log('Listening on port harsha ' + server.address().port);
   config.someFunction()
-  config.connectDb()
-
+  db.connectDb()
+ 
 });
 
