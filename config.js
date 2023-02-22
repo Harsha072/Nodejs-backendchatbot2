@@ -1,14 +1,14 @@
 const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm");
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const ssmClient = new SSMClient({
-  region: "us-east-1",
-  credentials: {
-    accessKeyId: "ASIARFTZFSZJQWSEUG4L",
-    secretAccessKey: "nqj/E29zxrhzrx8Bs+xmPtBmmwS5IYOBXYzR/XLU",
-    sessionToken: "FwoGZXIvYXdzEEsaDNTiaplC9GfTuMih5yLCAb7cURsoHzy+mBapqN4NAfZrGteXqYfK7CfZOrrGEHBHt6/5XOrLBUPkPv35XAeXsqsBYG3g7lfrFzvmn1xuA9RzjXk8ly9dsuMsj+/iO1SVyRJONmc1TbQCQ1UA0hAUW0lYlWSATkMGGNL1Xv+LCJS50vdJORJjr8wL70vm70t3LgR0VIsMtS61rn/oj8NizTdBgnCN1iknw6fUbiAwebUCJVnp55QcJHViueC9lVnIF/aBQjEoQyTWCWyhP5gqMbAtKKvP158GMi0GQlNoBpms/bu/eyFrSiTu/3TMO6Hm64QvK9Y9e9QOM1gz5mD1G0xZ4Go9CIE="
-  },
-});
+// const ssmClient = new SSMClient({
+//   region: "us-east-1",
+//   credentials: {
+//     accessKeyId: "ASIARFTZFSZJY23D4JVJ",
+//     secretAccessKey: "Z4N+i/YKKJNWXgbfDD5abK6g75mRWhMB9GGPAEuQ",
+//     sessionToken: "FwoGZXIvYXdzEFAaDMKaLArTqvbzaL1o0CLCAdTd0kUo1ZXv/W0xsMAP6e3vqiOAVnzBctSLXqqnGv/f8B3U30sr15OvY466OeyBCQ5RLmxH6lSL8F+2/ENiLjTwE0ao6yTeMUGOl3MhCeKlaod0DB2FjUpJdkGw+Fa86+8VaQLEsha2o7m5dN+G8UOLRlWED+7/Uep2CRew64NATcbmqyqNZTVWrh+OaPvCG+lU0zhnA2ID1xOHfhTX8VsjMFgGJAoGI2n70S+uoZea6/L/NI17bkaUdB82FXk9BR4WKK3H2J8GMi0P69nD1TZKb9GkAd2yLlOeAEM9+QIonjDSnlOwh+dBtUsyKxjPPsgVK/T5gNc="
+//   },
+// });
 
 
 async function someFunction(){
@@ -24,7 +24,7 @@ async function someFunction(){
             const projectId = {
               Name: "/my-app/dialogflow/projectId"
             }
-            // const ssmClient = new SSMClient({ region: "us-east-1" });
+            const ssmClient = new SSMClient({ region: "us-east-1" });
         
           
           const command1 = new GetParameterCommand(clientEmail);
