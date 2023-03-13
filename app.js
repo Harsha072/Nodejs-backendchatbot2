@@ -1,6 +1,7 @@
 const http = require('http');
-
+const cookieParser = require('cookie-parser')
 const config = require("./config")
+
 const db = require("./db")
 var express = require('express'),
     bodyParser = require('body-parser'),
@@ -11,8 +12,13 @@ var express = require('express'),
     index = require('./routes/index');
     
     var app = express();
-
+    app.use(cookieParser())
+  //   app.use(cors({
+  //     credentials: true,
+  //     origin: [ 'http://localhost:4200']
+  // }))
 app.use(cors({
+  credentials:true,
   origin: function(origin, callback) {
     // allow requests from localhost or your production domain
     if (origin==='http://localhost:4200' || origin === 'http://chatbot-appv1.s3-website-us-east-1.amazonaws.com') {

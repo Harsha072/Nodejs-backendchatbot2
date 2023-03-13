@@ -82,10 +82,39 @@ return await {
 else{
    
     const responses = await sessionClient.detectIntent(intentRequest);
-  
-    console.log(responses[0].queryResult)
+ 
+    console.log("responses ::::: ",responses[0].queryResult)
+    const fulfillmentMessages = responses[0].queryResult.fulfillmentMessages;
     const result = responses[0].queryResult;
     console.log(responses[0].responseId)
+    console.log("fulll ",fulfillmentMessages)
+// Find the first message with a custom payload
+const customPayloadMessage = fulfillmentMessages.find(message => message.payload);
+
+if (customPayloadMessage) {
+  // Extract the custom payload from the message
+  const customPayload = customPayloadMessage.payload;
+console.log("got custome payload ",customPayload.fields)
+
+
+// Extract the URL of the GIF from the custom payload
+const gifUrl = customPayload.fields.payload.structValue;
+const gifFields = gifUrl.fields
+const struct = gifFields.gif
+const fild = struct.structValue
+const url =fild.fields.url
+return await {
+        
+    "id":responses[0].responseId,
+    "Query": result.queryText,
+    "Response": result.fulfillmentText,
+    "Intent": result.intent.displayName,
+    "url":url.stringValue
+};
+
+}
+else{
+
     return await {
         
         "id":responses[0].responseId,
@@ -93,6 +122,9 @@ else{
         "Response": result.fulfillmentText,
         "Intent": result.intent.displayName
     };
+}
+   
+    
 }
 
 }
