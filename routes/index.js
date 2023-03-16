@@ -7,6 +7,7 @@ const {connectDb} = require('../db')
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 
+
 const {PutItemCommand,ScanCommand,GetItemCommand,UpdateItemCommand } = require('@aws-sdk/client-dynamodb');
 
 var runIntent = require("../controller/dialogFlow").runIntent;
@@ -15,6 +16,7 @@ var runIntent = require("../controller/dialogFlow").runIntent;
 function generateRandomId() {
   return crypto.randomBytes(16).toString('hex');
 }
+
 
 // const ssmClient = new SSMClient({ region: "us-east-1" });
 
@@ -144,6 +146,7 @@ try {
     }
   });
 
+ 
 
   router.post('/login', async (req, res) => {
     const newUser = req.body
@@ -181,7 +184,15 @@ const presentUser = await client.send(new GetItemCommand(params))
     };
     const data = await client.send(new UpdateItemCommand(params));
     console.log("Item updated:", data);
-    res.status(200).send(data);
+    req.session.user = {
+      id: data.Attributes.id.S,
+      name: data.Attributes.username.S,
+      email: data.Attributes.email.S,
+      loginTime:data.Attributes.loginTime.S
+  };
+  console.log(req.session)
+  res.status(200).send(req.session.user);
+   
   } catch (err) {
     res.status(500).send(err);
     console.log("hi ",err)
@@ -189,7 +200,7 @@ const presentUser = await client.send(new GetItemCommand(params))
 }
   else{
     console.log("else part::::: ")
- const params = {
+ const paramsNew = {
     TableName: users,
     Item: {
       'email': {S: newUser.email},
@@ -202,9 +213,14 @@ const presentUser = await client.send(new GetItemCommand(params))
   }
   try {
        
-    const data = await client.send(new PutItemCommand(params));
+    const data = await client.send(new PutItemCommand(paramsNew));
     console.log("Item inserted successfully to users:", data);
-    res.status(200).send(data.Item);
+    req.session.user = {
+      
+      name: newUser.username,
+      email: newUser.email
+  };
+    res.status(200).send(data);
 
   } catch (err) {
     res.status(500).send(err);
@@ -213,6 +229,50 @@ const presentUser = await client.send(new GetItemCommand(params))
   }
   
   });
+
+  router.post('/store', async (req, res) => {
+    try {
+      req.session.user = {
+        id: 123,
+        name: 'John Doe',
+        lastLogin: new Date()
+      };
+      console.log(req.session)
+      console.log(req.session.user);
+      console.log("store ",res)
+      res.json(req.session.user);
+      // res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: 'Failed to store session data' });
+    }
+  });
+
+  router.get('/userinfo', async (req, res) => {
+    console.log("info ",req.session)
+    try {
+      if (req.session.user) {
+        console.log("inside if ")
+        const now = new Date().getTime();
+        const expires = new Date(req.session.cookie._expires).getTime(); // Use _expires instead of expires
+        if (now < expires) {
+          console.log("Session has not expired, return user info")
+          res.json(req.session.user);
+        } else {
+          console.log("Session expired")
+          req.session.destroy();
+          res.sendStatus(401);
+        }
+      } else {
+        console.log('Unauthorized access.',req.session);
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: 'Failed to retrieve session data' });
+    }
+  });
+
 
   router.post('/logout', async (req, res) => {
     const { client,users } = await connectDb();
@@ -243,7 +303,9 @@ const presentUser = await client.send(new GetItemCommand(params))
         };
         const data = await client.send(new UpdateItemCommand(params));
         console.log("Item updated: session ", data);
+        req.session.destroy()
         res.status(200).send(data);
+
       } catch (err) {
         res.status(500).send(err);
         console.log("hi ",err)
