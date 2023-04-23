@@ -1,5 +1,5 @@
 const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm");
-const ssmClient = new SSMClient({ region: "us-east-1" });
+// const ssmClient = new SSMClient({ region: "us-east-1" });
 
 // const ssmClient = new SSMClient({
 //   region: "us-east-1",
@@ -23,7 +23,7 @@ async function someFunction(){
             const projectId = {
               Name: "/my-app/dialogflow/projectId"
             }
-            // const ssmClient = new SSMClient({ region: "us-east-1" });
+             const ssmClient = new SSMClient({ region: "us-east-1" });
         
           
           const command1 = new GetParameterCommand(clientEmail);
