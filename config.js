@@ -22,7 +22,7 @@ async function someFunction(){
         
           
           const command1 = new GetParameterCommand(clientEmail);
-          console.log("got command",command1)
+          
           const email = await ssmClient.send(command1);
          var Demail=email.Parameter.Value
         
@@ -34,7 +34,7 @@ async function someFunction(){
           const command3 = new GetParameterCommand(privatekey);
          const  key = await ssmClient.send(command3);
         var  Dkey= key.Parameter.Value;
-      
+        console.log("got command",Demail,Dkey,id)
       
         return [Dkey,Demail,id];
 }
