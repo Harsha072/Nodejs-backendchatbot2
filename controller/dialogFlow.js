@@ -120,7 +120,8 @@ else{
         "id":responses[0].responseId,
         "Query": result.queryText,
         "Response": result.fulfillmentText,
-        "Intent": result.intent.displayName
+        "Intent": result.intent.displayName,
+        "status":result.intent.endInteraction
     };
 }
    
@@ -138,3 +139,4 @@ catch(error){
 }
 
 module.exports.runIntent = runIntent;
+

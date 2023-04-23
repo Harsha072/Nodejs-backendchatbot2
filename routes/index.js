@@ -47,7 +47,8 @@ try {
           "id": result.id,
           "responseMessage": result.Response,
           "originalQuery": result.Query,
-          "intent": result.Intent
+          "intent": result.Intent,
+          "status":result.status
         });
 
     })()
@@ -59,21 +60,7 @@ try {
 
   );
 
-  router.get('/quiz', async (req, res) => {
-    try {
-      const response = await axios.get('https://the-trivia-api.com/api/questions?categories=history,science,geography,sport_and_leisure&limit=5&region=IN&difficulty=hard');
-      console.log(response)
-      const quizClient =await connectDb()
-      console.log("client:::: ",quizClient);
-   
-      const quiz = response.data
-      console.log(quiz)
-      res.send(quiz[0]);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Failed to retrieve data from API' });
-    }
-  });
+ 
 
   router.get('/quiz-question/:id', async (req, res) => {
     try {
@@ -209,18 +196,33 @@ const presentUser = await client.send(new GetItemCommand(params))
       'loginTime': {S: newUser.loginTime},
       'totalLogin': {N: newUser.totalLogin.toString()},
       'sessionDuration': {S: newUser.sessionDuration}
-    }
+    },
+    
   }
   try {
        
     const data = await client.send(new PutItemCommand(paramsNew));
     console.log("Item inserted successfully to users:", data);
-    req.session.user = {
+    const paramsCheck = {
+      TableName: users,
+      Key: {
+        'email': {S: newUser.email}
+      }
+    };
+    try {
+      const data = await client.send(new GetItemCommand(paramsCheck));
+      console.log("Retrieved user information:", data.Item);
+      req.session.user = {
       
-      name: newUser.username,
-      email: newUser.email
-  };
-    res.status(200).send(data);
+        name: data.Item.username.S,
+        email:data.Item.email.S,
+        loginTime:data.Item.loginTime.S
+    };
+    } catch (err) {
+      console.error("Error retrieving user information:", err);
+    }
+   
+    res.status(200).send(req.session.user);
 
   } catch (err) {
     res.status(500).send(err);
@@ -325,7 +327,7 @@ const presentUser = await client.send(new GetItemCommand(params))
     }
       
     const presentUser = await client.send(new GetItemCommand(params))
-      console.log("got it in prequiz:: ",presentUser.Item, prequiz)
+      console.log("got it in prequiz:: ",presentUser.Item, )
       
       if(presentUser.Item){
        
@@ -335,7 +337,7 @@ const presentUser = await client.send(new GetItemCommand(params))
             'email': {S: req.body.email},
             'id':{S:generateRandomId().toString()},
             'score': {N: req.body.score.toString()},
-            'totalTimeTaken': {S: req.body.totalTimeTaken},
+            'totalTimeTaken': {N: req.body.totalTimeTaken.toString()},
             'timeStamp': {S: req.body.timeStamp}
           }
         }
@@ -351,7 +353,44 @@ const presentUser = await client.send(new GetItemCommand(params))
         }
     }
   });
+  router.post('/postquiz', async (req, res) => {
+    console.log("reqest body prequiz",req.body)
+    const { client,users,postquiz } = await connectDb();
 
+    const params ={
+      TableName: users,
+      Key: {
+        'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
+      }
+    }
+      
+    const presentUser = await client.send(new GetItemCommand(params))
+      console.log("got it in prequiz:: ",presentUser.Item, )
+      
+      if(presentUser.Item){
+       
+        const params = {
+          TableName: postquiz,
+          Item: {
+            'email': {S: req.body.email},
+            'id':{S:generateRandomId().toString()},
+            'score': {N: req.body.score.toString()},
+            'totalTimeTaken': {N: req.body.totalTimeTaken.toString()},
+            'timeStamp': {S: req.body.timeStamp}
+          }
+        }
+        try {
+             
+          const data = await client.send(new PutItemCommand(params));
+          console.log("Item inserted successfully to prequiz:", data);
+          res.status(200).send(data.Item);
+      
+        } catch (err) {
+          res.status(500).send(err);
+          console.error("Error inserting item in prequiz:", err);
+        }
+    }
+  });
   router.get('/user', async (req, res) => {
    
 })

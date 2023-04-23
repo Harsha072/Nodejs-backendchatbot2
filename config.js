@@ -4,9 +4,9 @@ const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm");
 const ssmClient = new SSMClient({
   region: "us-east-1",
   credentials: {
-    accessKeyId: "ASIARFTZFSZJWX2Y72Y5",
-    secretAccessKey: "w9GggMq0V7kgI6fWAlfr3uAGYERskBKIOqtgp47R",
-    sessionToken: "FwoGZXIvYXdzEGIaDJFUhYkqp6jpk17pvyLCASBDO4YmW6SW4owYcWeqbJiyz+LEJYyxQj3vsV+hOkkBwm3k3S5oE3zOp848VnZz6Cu2ezaDQrwgm1CEGPRh0pxq3+10IOKjo1dLzVoEA1DX2UAmhwnKB5F4kgHlseBCdtDLWQmGAKGeXzHhv4OrgFSUHeCa3peNhm6nHHxInCDu3VCRB3bDHnbN5K47r33J7Hdc5BinK/tk8jFegjoESWCalW50zWkQSKcOslG8fz2wRGroyIsuuI2U4RngVgCs7bAWKO+JzaAGMi1oCA+BoBPIprkk73uOjvuVSht7lWMYNt6xcPUb9as+W8rlSRzjFU7sEoQvB2U="
+    accessKeyId: "ASIAQXZNHOSXMRB6UDGW",
+    secretAccessKey: "u6ZpbXOPp7pGdCLlOmn+74RThztI4Id0p99IUd1P",
+    sessionToken: "FwoGZXIvYXdzEPD//////////wEaDJQMIqCz4ba/bXrtNyLCASqosAa1TbZmO+Kd4k05fTQQ1Mg5er/nH9P1I09Aq06Cy+NR9LVlRHCTeRH406WhOgkQsfJUY4ovZjnHfq5jpjp311H7aEQvZ8Vo8XXY76HnqcLBEu2l2mTtkiHPfAeNWDjtMSgLTcsyF7qzZVrlbeaOFkTO8vgLM2DF/OdI93kD+uZcER3Rc2cn9MpKDDweHL0WWmqNiFA9295o68uyqb3fSJakw1Zb4s8tJWtZJQ+q1f50u2l2ndxpD48orQ9Srw2AKIqMlaIGMi3/zlxJ7fLQwgEzq97e94SuzhNOmCUBq0STVp9POvqWI7iCixRCSkhYttCuzMY="
   }
 });
 
@@ -17,7 +17,7 @@ async function someFunction(){
             };
           
             const privatekey = {
-              Name: "/my-app/dialogflow/privatekey",
+              Name: "/my-app/dialogflow/privateKey",
               WithDecryption: true
             }
             const projectId = {
