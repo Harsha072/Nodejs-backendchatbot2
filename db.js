@@ -2,7 +2,6 @@ const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 
 
 
-
 let client;
 const quiz = 'quiz'
 const users = 'users'
@@ -15,13 +14,17 @@ async function connectDb() {
   } else {
     //new connection
     client = new DynamoDBClient({
-      region: "us-east-1",
-      credentials: {
-        accessKeyId: "ASIAQXZNHOSXMRB6UDGW",
-        secretAccessKey: "u6ZpbXOPp7pGdCLlOmn+74RThztI4Id0p99IUd1P",
-        sessionToken: "FwoGZXIvYXdzEPD//////////wEaDJQMIqCz4ba/bXrtNyLCASqosAa1TbZmO+Kd4k05fTQQ1Mg5er/nH9P1I09Aq06Cy+NR9LVlRHCTeRH406WhOgkQsfJUY4ovZjnHfq5jpjp311H7aEQvZ8Vo8XXY76HnqcLBEu2l2mTtkiHPfAeNWDjtMSgLTcsyF7qzZVrlbeaOFkTO8vgLM2DF/OdI93kD+uZcER3Rc2cn9MpKDDweHL0WWmqNiFA9295o68uyqb3fSJakw1Zb4s8tJWtZJQ+q1f50u2l2ndxpD48orQ9Srw2AKIqMlaIGMi3/zlxJ7fLQwgEzq97e94SuzhNOmCUBq0STVp9POvqWI7iCixRCSkhYttCuzMY="
-      }
-    });
+      region: "us-east-1"
+      });
+
+    // client = new DynamoDBClient({
+    //   region: "us-east-1",
+    //   credentials: {
+    //     accessKeyId: "ASIARFTZFSZJQPNJVAHO",
+    //     secretAccessKey: "skE6zSRjQ1A+E0RJFFt4nFIk3qyeFfdXtGH5hN3L",
+    //     sessionToken: "FwoGZXIvYXdzEKH//////////wEaDDgmFrpVkLQKfh16CiLCAeMCc4JnFnpV7giCqRFqz17Y7gexwpIWQJ4wUXlyJxWn3PEvhxC47fd/rZM/I4OgbT1WnmcGeHggcTa75cSsnxABdW8bmLOoOIK6PN4vnM0kIXLefpcny6XgLmICd5sDjp4+/RaQnGaluo2IRglQw3B6NEY7PCGDxm7ZFXRsIWvJYPgAEV22zb0J2FrlO82JInHEjgBoYPgVBOuVPjzAp2Hn9Okd+GdEFXiTQNCBLCn1njdRu4Nmukrcp51pBZ9WhVNyKK24y6EGMi0ypQPsWNIfDbMw049qQg86t+7//45wvNElwq+XP9Y+r7BJG6YJZzYpThyoRec="
+    //   }
+    // });
  
     console.log('Created new client instance',quiz);
     return { client, quiz,users,prequiz,postquiz };
