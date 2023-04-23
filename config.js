@@ -23,6 +23,7 @@ async function someFunction(){
         
           
           const command1 = new GetParameterCommand(clientEmail);
+          console.log("got command",command1)
           const email = await ssmClient.send(command1);
          var Demail=email.Parameter.Value
         
