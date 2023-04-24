@@ -392,10 +392,10 @@ const presentUser = await client.send(new GetItemCommand(params))
     }
   });
   router.get('/user', async (req, res) => {
-    const { client ,user } = await connectDb();
+    const { client ,users } = await connectDb();
     console.log("the client in user", client)
     const paramsCheck = {
-      TableName: user,
+      TableName: users,
       Key: {
         'id': {S: "5678"}
       }
