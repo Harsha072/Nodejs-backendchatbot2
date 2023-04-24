@@ -19,10 +19,12 @@ async function someFunction(){
               Name: "/my-app/dialogflow/projectId"
             }
             //  ssmClient = new SSMClient({ region: "us-east-1" });
-        
-          
+        console.log("brfor ssm")
+            const ssmClient = new SSMClient({
+              region: "us-east-1"
+            });
+            console.log("aftr ssm")
           const command1 = new GetParameterCommand(clientEmail);
-          
           const email = await ssmClient.send(command1);
          var Demail=email.Parameter.Value
         
