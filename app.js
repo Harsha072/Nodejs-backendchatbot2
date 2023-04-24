@@ -100,7 +100,7 @@ app.use(function(err, req, res, next) {
 // finally, let's start our server...
 var server = app.listen(process.env.PORT || 8080, function(){
   console.log('Listening on port harsha calling both fucntions ' + server.address().port);
-  //  config.someFunction()
+   config.someFunction()
   db.connectDb()
  
 });
