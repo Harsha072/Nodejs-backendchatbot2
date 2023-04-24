@@ -27,35 +27,35 @@ var express = require('express'),
     sessionMiddleware.debug = true;
 
 
-app.use(cors({
-  credentials:true,
-  origin: function(origin, callback) {
-    // allow requests from localhost or your production domain
-    if (origin==='http://localhost:4200' || origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com') {
-      callback(null, true);
-    }
-    // otherwise, reject the request
-    else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+// app.use(cors({
+//   credentials:true,
+//   origin: function(origin, callback) {
+//     // allow requests from localhost or your production domain
+//     if (origin==='http://localhost:4200' || origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com') {
+//       callback(null, true);
+//     }
+//     // otherwise, reject the request
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// }));
 
 
 
-app.use(function(req, res, next) {
-  const origin = req.headers.origin;
-  if (origin === 'http://localhost:4200') { 
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  } else if (origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com') {
-    res.header("Access-Control-Allow-Origin", "https://master.d3k1bcu80lqkdq.amplifyapp.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  }
-  next();
-});
+// app.use(function(req, res, next) {
+//   const origin = req.headers.origin;
+//   if (origin === 'http://localhost:4200') { 
+//     res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   } else if (origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com') {
+//     res.header("Access-Control-Allow-Origin", "https://master.d3k1bcu80lqkdq.amplifyapp.com");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   }
+//   next();
+// });
 
-// app.use(cors());
+app.use(cors());
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
