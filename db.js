@@ -4,7 +4,7 @@ const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 
 let client;
 const quiz = 'quiz'
-const users = 'user'
+const user = 'user'
 const prequiz ='prequiz'
 const postquiz='postquiz'
 async function connectDb() {
