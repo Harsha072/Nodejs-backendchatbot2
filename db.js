@@ -9,7 +9,7 @@ const prequiz ='prequiz'
 const postquiz='postquiz'
 async function connectDb() {
   if (client) {
-    console.log('Using existing client instance');
+    console.log('Using existing client instance harsha');
     return{ client, quiz,users,prequiz,postquiz };
   } else {
     //new connection
@@ -26,7 +26,7 @@ async function connectDb() {
     //   }
     // });
  
-    console.log('Created new client instance',quiz);
+    console.log('Created new client instance harsha',quiz);
     return { client, quiz,users,prequiz,postquiz };
   }
 }
