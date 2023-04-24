@@ -25,7 +25,7 @@ async function connectDb() {
     //     sessionToken: "FwoGZXIvYXdzEKH//////////wEaDDgmFrpVkLQKfh16CiLCAeMCc4JnFnpV7giCqRFqz17Y7gexwpIWQJ4wUXlyJxWn3PEvhxC47fd/rZM/I4OgbT1WnmcGeHggcTa75cSsnxABdW8bmLOoOIK6PN4vnM0kIXLefpcny6XgLmICd5sDjp4+/RaQnGaluo2IRglQw3B6NEY7PCGDxm7ZFXRsIWvJYPgAEV22zb0J2FrlO82JInHEjgBoYPgVBOuVPjzAp2Hn9Okd+GdEFXiTQNCBLCn1njdRu4Nmukrcp51pBZ9WhVNyKK24y6EGMi0ypQPsWNIfDbMw049qQg86t+7//45wvNElwq+XP9Y+r7BJG6YJZzYpThyoRec="
     //   }
     // });
- 
+ console.log("client  ",client)
     console.log('Created new client instance harsha',quiz);
     return { client, quiz,user,prequiz,postquiz };
   }
