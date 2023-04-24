@@ -395,7 +395,7 @@ const presentUser = await client.send(new GetItemCommand(params))
     const paramsCheck = {
       TableName: user,
       Key: {
-        'id': {S: "567"}
+        'id': {S: "5678"}
       }
     };
     try {
