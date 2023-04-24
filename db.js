@@ -4,13 +4,13 @@ const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 
 let client;
 const quiz = 'quiz'
-const users = 'users'
+const users = 'user'
 const prequiz ='prequiz'
 const postquiz='postquiz'
 async function connectDb() {
   if (client) {
     console.log('Using existing client instance harsha');
-    return{ client, quiz,users,prequiz,postquiz };
+    return{ client, quiz,user,prequiz,postquiz };
   } else {
     //new connection
     client = new DynamoDBClient({
@@ -27,7 +27,7 @@ async function connectDb() {
     // });
  
     console.log('Created new client instance harsha',quiz);
-    return { client, quiz,users,prequiz,postquiz };
+    return { client, quiz,user,prequiz,postquiz };
   }
 }
 
