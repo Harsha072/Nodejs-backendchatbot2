@@ -392,7 +392,20 @@ const presentUser = await client.send(new GetItemCommand(params))
     }
   });
   router.get('/user', async (req, res) => {
-   
+    const paramsCheck = {
+      TableName: users,
+      Key: {
+        'id': {S: "567"}
+      }
+    };
+    try {
+      const data = await client.send(new GetItemCommand(paramsCheck));
+      console.log("Retrieved user information harsha:", data.Item);
+    }
+    catch (err) {
+      
+      console.error("Error getting ", err);
+    }
 })
 
 
