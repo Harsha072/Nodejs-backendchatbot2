@@ -393,7 +393,7 @@ const presentUser = await client.send(new GetItemCommand(params))
   });
   router.get('/user', async (req, res) => {
     const paramsCheck = {
-      TableName: users,
+      TableName: user,
       Key: {
         'id': {S: "567"}
       }
