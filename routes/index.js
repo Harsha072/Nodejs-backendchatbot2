@@ -133,7 +133,16 @@ try {
     }
   });
 
- 
+  router.post('/harsha', async (req, res) => {
+    console.log("the req ",req.baseUrl)
+    try {
+      res.status(200).send({ message: 'its working harsha ha ha' })
+     
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: 'Failed to retrieve data from API' });
+    }
+  });
 
   router.post('/login', async (req, res) => {
     const newUser = req.body
