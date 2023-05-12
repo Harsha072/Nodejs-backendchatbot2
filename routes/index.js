@@ -66,7 +66,7 @@ try {
     try {
       console.log(" get question based on id")
       const id = req.params.id;
-      console.log("number ",id)
+      console.log("n ",id)
       const { client, quiz } = await connectDb();
       const params1 = {
         TableName: quiz
@@ -76,15 +76,15 @@ try {
       const params = {
         TableName:quiz ,
         Key: {
-          'id': { N: id }
+          'id': { N:id  }
         }
       };
       try {
       
-       console.log("id", typeof data.Items.length)
+     console.log("type of id", typeof id)
        const num = parseInt(id)
        console.log("type of num::: ",typeof num)
-       console.log("length",data.Items.length)
+       console.log("length", typeof data.Items.length)
         if(num<=data.Items.length){
           console.log("in if:::")
           const command = new GetItemCommand(params);
