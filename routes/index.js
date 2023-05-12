@@ -147,17 +147,9 @@ try {
   router.post('/login', async (req, res) => {
     const newUser = req.body
    console.log("backend data new login harsha ",newUser)
-   const { client,users } = await connectDb();
-
-const params ={
-  TableName: users,
-  Key: {
-    'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
-  }
-}
   
-const presentUser = await client.send(new GetItemCommand(params))
-  console.log("got it:: ",presentUser.Item)
+
+
   try {
         res.status(200).send({ message: "hi nerw  login" })
        
