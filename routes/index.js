@@ -146,19 +146,25 @@ try {
 
   router.post('/login', async (req, res) => {
     const newUser = req.body
-   console.log("backend data new login ",newUser)
-//    const { client,users } = await connectDb();
+   console.log("backend data new login harsha ",newUser)
+   const { client,users } = await connectDb();
 
-// const params ={
-//   TableName: users,
-//   Key: {
-//     'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
-//   }
-// }
+const params ={
+  TableName: users,
+  Key: {
+    'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
+  }
+}
   
-// const presentUser = await client.send(new GetItemCommand(params))
-//   console.log("got it:: ",presentUser.Item)
-  
+const presentUser = await client.send(new GetItemCommand(params))
+  console.log("got it:: ",presentUser.Item)
+  try {
+        res.status(200).send({ message: "hi nerw  login" })
+       
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to retrieve data from API' });
+      }
 //   if(presentUser.Item){
 //     console.log("if part::::")
 //     console.log(typeof presentUser.Item.totalLogin.N)
