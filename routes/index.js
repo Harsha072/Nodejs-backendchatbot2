@@ -158,13 +158,7 @@ const params ={
   console.log("th eparams ",params)
 const presentUser = await client.send(new GetItemCommand(params))
   console.log("got it:: ",presentUser.Item)
-  try {
-        res.status(200).send({ message: params })
-       
-      } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Failed to retrieve data from API' });
-      }
+
   if(presentUser.Item){
     console.log("if part::::")
     console.log(typeof presentUser.Item.totalLogin.N)
