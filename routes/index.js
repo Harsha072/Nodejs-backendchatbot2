@@ -179,15 +179,15 @@ const presentUser = await client.send(new GetItemCommand(params))
       ReturnValues: "ALL_NEW"
     };
     const data = await client.send(new UpdateItemCommand(params));
-    console.log("Item updated:", data);
-    req.session.user = {
+    console.log("Item updated:", req.session);
+    req.session.users = {
       id: data.Attributes.id.S,
       name: data.Attributes.username.S,
       email: data.Attributes.email.S,
       loginTime:data.Attributes.loginTime.S
   };
   console.log("thev session ",req.session)
-  res.status(200).send(req.session.user);
+  res.status(200).send(req.session.users);
    
   } catch (err) {
     res.status(500).send(err);
@@ -231,7 +231,7 @@ const presentUser = await client.send(new GetItemCommand(params))
       console.error("Error retrieving user information:", err);
     }
    
-    res.status(200).send(req.session.user);
+    res.status(200).send(req.session.users);
 
   } catch (err) {
     res.status(500).send(err);
