@@ -19,16 +19,16 @@ app.use(cors({
   credentials: true,
   exposedHeaders: ['Access-Control-Allow-Origin']
 }));
-    // const sessionMiddleware = session({
-    //   secret: 'some secret string',
-    //   resave: false,
-    //   saveUninitialized: true,
-    //   cookie: {
-    //     maxAge: 180000 // 3 minutes in milliseconds
-    //   }
-    // });
-    // app.use(sessionMiddleware);
-    // sessionMiddleware.debug = true;
+    const sessionMiddleware = session({
+      secret: 'some secret string',
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+        maxAge: 180000 // 3 minutes in milliseconds
+      }
+    });
+    app.use(sessionMiddleware);
+    sessionMiddleware.debug = true;
 
     // app.use(function(req, res, next) {
     //   const origin = req.headers.origin;
@@ -74,9 +74,6 @@ var isProduction = process.env.NODE_ENV === 'production';
 app.use("/api/", index);
 
     
-
-
-// app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 if (!isProduction) {
   app.use(errorhandler());
