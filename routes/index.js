@@ -134,9 +134,9 @@ try {
   });
 
   router.post('/harsha', async (req, res) => {
-    console.log("the req ",req.baseUrl)
+    console.log("the req ",req.body)
     try {
-      res.status(200).send({ message: 'its working harsha ha ha' })
+      res.status(200).send({ message: "hi login harsha" })
      
     } catch (error) {
       console.error(error);
@@ -146,7 +146,7 @@ try {
 
   router.post('/login', async (req, res) => {
     const newUser = req.body
-   console.log("backend data ",newUser)
+   console.log("backend data new login ",newUser)
    const { client,users } = await connectDb();
 
 const params ={
