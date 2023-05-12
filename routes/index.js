@@ -133,111 +133,111 @@ try {
     }
   });
 
-  router.post('/harsha', async (req, res) => {
-    console.log("the req ",req.body)
-    try {
-      res.status(200).send({ message: "hi login harsha" })
+  // router.post('/login', async (req, res) => {
+  //   console.log("the req ",req.body)
+  //   try {
+  //     res.status(200).send({ message: "hi login" })
      
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Failed to retrieve data from API' });
-    }
-  });
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).send({ error: 'Failed to retrieve data from API' });
+  //   }
+  // });
 
   router.post('/login', async (req, res) => {
     const newUser = req.body
    console.log("backend data new login ",newUser)
-   const { client,users } = await connectDb();
+//    const { client,users } = await connectDb();
 
-const params ={
-  TableName: users,
-  Key: {
-    'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
-  }
-}
+// const params ={
+//   TableName: users,
+//   Key: {
+//     'email': {S:req.body.email} // Replace 'user@example.com' with the actual email value
+//   }
+// }
   
-const presentUser = await client.send(new GetItemCommand(params))
-  console.log("got it:: ",presentUser.Item)
+// const presentUser = await client.send(new GetItemCommand(params))
+//   console.log("got it:: ",presentUser.Item)
   
-  if(presentUser.Item){
-    console.log("if part::::")
-    console.log(typeof presentUser.Item.totalLogin.N)
-    console.log(parseInt(presentUser.Item.totalLogin.N)+1);
-   presentUser.Item.totalLogin.N = parseInt(presentUser.Item.totalLogin.N)+1
-   presentUser.Item.loginTime.S = newUser.loginTime
-    console.log("updated",presentUser.Item.totalLogin.N)
-    console.log("updated time",presentUser.Item.loginTime.S)  
-   try {
+//   if(presentUser.Item){
+//     console.log("if part::::")
+//     console.log(typeof presentUser.Item.totalLogin.N)
+//     console.log(parseInt(presentUser.Item.totalLogin.N)+1);
+//    presentUser.Item.totalLogin.N = parseInt(presentUser.Item.totalLogin.N)+1
+//    presentUser.Item.loginTime.S = newUser.loginTime
+//     console.log("updated",presentUser.Item.totalLogin.N)
+//     console.log("updated time",presentUser.Item.loginTime.S)  
+//    try {
        
-    const params = {
-      TableName: users,
-      Key: { "email": { S: presentUser.Item.email.S } },
-      UpdateExpression: "SET #attrName = :attrValue, #attrTime = :attrValueTime",
-      ExpressionAttributeNames: { "#attrName": "totalLogin", "#attrTime":"loginTime" },
-      ExpressionAttributeValues: { ":attrValue": { N: presentUser.Item.totalLogin.N.toString() },
-                                    ":attrValueTime":{S:presentUser.Item.loginTime.S} },
-      ReturnValues: "ALL_NEW"
-    };
-    const data = await client.send(new UpdateItemCommand(params));
-    console.log("Item updated:", data);
-    req.session.user = {
-      id: data.Attributes.id.S,
-      name: data.Attributes.username.S,
-      email: data.Attributes.email.S,
-      loginTime:data.Attributes.loginTime.S
-  };
-  console.log(req.session)
-  res.status(200).send(req.session.user);
+//     const params = {
+//       TableName: users,
+//       Key: { "email": { S: presentUser.Item.email.S } },
+//       UpdateExpression: "SET #attrName = :attrValue, #attrTime = :attrValueTime",
+//       ExpressionAttributeNames: { "#attrName": "totalLogin", "#attrTime":"loginTime" },
+//       ExpressionAttributeValues: { ":attrValue": { N: presentUser.Item.totalLogin.N.toString() },
+//                                     ":attrValueTime":{S:presentUser.Item.loginTime.S} },
+//       ReturnValues: "ALL_NEW"
+//     };
+//     const data = await client.send(new UpdateItemCommand(params));
+//     console.log("Item updated:", data);
+//     req.session.user = {
+//       id: data.Attributes.id.S,
+//       name: data.Attributes.username.S,
+//       email: data.Attributes.email.S,
+//       loginTime:data.Attributes.loginTime.S
+//   };
+//   console.log(req.session)
+//   res.status(200).send(req.session.user);
    
-  } catch (err) {
-    res.status(500).send(err);
-    console.log("hi ",err)
-  }
-}
-  else{
-    console.log("else part::::: ")
- const paramsNew = {
-    TableName: users,
-    Item: {
-      'email': {S: newUser.email},
-      'id':{S:generateRandomId().toString()},
-      'username': {S: newUser.username},
-      'loginTime': {S: newUser.loginTime},
-      'totalLogin': {N: newUser.totalLogin.toString()},
-      'sessionDuration': {S: newUser.sessionDuration}
-    },
+//   } catch (err) {
+//     res.status(500).send(err);
+//     console.log("hi ",err)
+//   }
+// }
+//   else{
+//     console.log("else part::::: ")
+//  const paramsNew = {
+//     TableName: users,
+//     Item: {
+//       'email': {S: newUser.email},
+//       'id':{S:generateRandomId().toString()},
+//       'username': {S: newUser.username},
+//       'loginTime': {S: newUser.loginTime},
+//       'totalLogin': {N: newUser.totalLogin.toString()},
+//       'sessionDuration': {S: newUser.sessionDuration}
+//     },
     
-  }
-  try {
+//   }
+//   try {
        
-    const data = await client.send(new PutItemCommand(paramsNew));
-    console.log("Item inserted successfully to users:", data);
-    const paramsCheck = {
-      TableName: users,
-      Key: {
-        'email': {S: newUser.email}
-      }
-    };
-    try {
-      const data = await client.send(new GetItemCommand(paramsCheck));
-      console.log("Retrieved user information:", data.Item);
-      req.session.user = {
+//     const data = await client.send(new PutItemCommand(paramsNew));
+//     console.log("Item inserted successfully to users:", data);
+//     const paramsCheck = {
+//       TableName: users,
+//       Key: {
+//         'email': {S: newUser.email}
+//       }
+//     };
+//     try {
+//       const data = await client.send(new GetItemCommand(paramsCheck));
+//       console.log("Retrieved user information:", data.Item);
+//       req.session.user = {
       
-        name: data.Item.username.S,
-        email:data.Item.email.S,
-        loginTime:data.Item.loginTime.S
-    };
-    } catch (err) {
-      console.error("Error retrieving user information:", err);
-    }
+//         name: data.Item.username.S,
+//         email:data.Item.email.S,
+//         loginTime:data.Item.loginTime.S
+//     };
+//     } catch (err) {
+//       console.error("Error retrieving user information:", err);
+//     }
    
-    res.status(200).send(req.session.user);
+//     res.status(200).send(req.session.user);
 
-  } catch (err) {
-    res.status(500).send(err);
-    console.error("Error inserting item in users:", err);
-  }
-  }
+//   } catch (err) {
+//     res.status(500).send(err);
+//     console.error("Error inserting item in users:", err);
+//   }
+//   }
   
   });
 
