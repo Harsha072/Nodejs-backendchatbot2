@@ -9,10 +9,10 @@ const prequiz ='prequiz'
 const postquiz='postquiz'
 async function connectDb() {
   if (client) {
-    console.log('Using existing client instance harsha');
+    console.log('Using existing harsha client instance harsha');
     return{ client, quiz,users,prequiz,postquiz };
   } else {
-    console.log("new connection")
+    console.log("new harsha connection")
     client = new DynamoDBClient({
       region: "us-east-1"
       });
