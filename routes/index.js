@@ -156,8 +156,8 @@ const params ={
   }
 }
   console.log("th eparams ",params)
-// const presentUser = await client.send(new GetItemCommand(params))
-  // console.log("got it:: ",presentUser.Item)
+const presentUser = await client.send(new GetItemCommand(params))
+  console.log("got it:: ",presentUser.Item)
   try {
         res.status(200).send({ message: params })
        
