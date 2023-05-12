@@ -159,7 +159,7 @@ const params ={
 // const presentUser = await client.send(new GetItemCommand(params))
   // console.log("got it:: ",presentUser.Item)
   try {
-        res.status(200).send({ message: "hi nerw login" })
+        res.status(200).send({ message: params })
        
       } catch (error) {
         console.error(error);
