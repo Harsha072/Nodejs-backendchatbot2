@@ -40,7 +40,7 @@ var express = require('express'),
       origin: function(origin, callback) {
         console.log("the origin", origin);
         // allow requests from localhost or your production domain
-        if (origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com/') {
+        if (origin === 'https://master.d3k1bcu80lqkdq.amplifyapp.com') {
           callback(null, true);
         }
         // otherwise, reject the request
