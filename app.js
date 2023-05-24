@@ -92,14 +92,14 @@ app.use(function(err, req, res, next) {
     error: {}
   }});
 });
-// config.someFunction()
-// db.connectDb()
-// module.exports.server = sls(app);
+config.someFunction()
+db.connectDb()
+module.exports.server = sls(app);
 
-var server = app.listen(process.env.PORT || 8080, function(){
-  console.log('Listening on port harsha calling both fucntions ' + server.address().port);
-   config.someFunction()
-  db.connectDb()
+// var server = app.listen(process.env.PORT || 8080, function(){
+//   console.log('Listening on port harsha calling both fucntions ' + server.address().port);
+//    config.someFunction()
+//   db.connectDb()
  
-});
+// });
 
