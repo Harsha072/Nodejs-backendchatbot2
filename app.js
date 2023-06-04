@@ -14,11 +14,7 @@ var express = require('express'),
     index = require('./routes/index');
     
     var app = express();
-// app.use(cors({
-//   origin: 'https://master.d3k1bcu80lqkdq.amplifyapp.com',
-//   credentials: true,
-//   exposedHeaders: ['Access-Control-Allow-Origin']
-// }));
+
     const sessionMiddleware = session({
       secret: 'some secret string',
       resave: false,
@@ -97,7 +93,7 @@ db.connectDb()
 module.exports.server = sls(app);
 
 // var server = app.listen(process.env.PORT || 8080, function(){
-//   console.log('Listening on port harsha calling both fucntions ' + server.address().port);
+//   console.log('Listening on port harsha calling both fucntions new  ' + server.address().port);
 //    config.someFunction()
 //   db.connectDb()
  

@@ -8,15 +8,15 @@ const ssmClient = new SSMClient({
 async function someFunction(){
   console.log("calling some function")
           const clientEmail = {
-              Name: "/my-app/dialogflow/clientEmail"
+              Name: "/my-app/dialogflow2/clientEmail"
             };
           
             const privatekey = {
-              Name: "/my-app/dialogflow/privateKey",
+              Name: "/my-app/dialogflow2/privateKey",
               WithDecryption: true
             }
             const projectId = {
-              Name: "/my-app/dialogflow/projectId"
+              Name: "/my-app/dialogflow2/projectId"
             }
             //  ssmClient = new SSMClient({ region: "us-east-1" });
         console.log("brfor ssm")
