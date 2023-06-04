@@ -4,9 +4,9 @@ const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 
 let client;
 const quiz = 'quiz'
-const users = 'users'
-const prequiz ='prequiz'
-const postquiz='postquiz'
+const users = 'users2'
+const prequiz ='prequiz2'
+const postquiz='postquiz2'
 async function connectDb() {
   if (client) {
     console.log('Using existing harsha client instance harsha');
