@@ -36,7 +36,7 @@ var express = require('express'),
       origin: function(origin, callback) {
         console.log("the origin", origin);
         // allow requests from localhost or your production domain
-        if (origin === 'https://master.d3m4z9om1rnwvt.amplifyapp.com') {
+        if (origin === 'https://master.d3m4z9om1rnwvt.amplifyapp.com' || origin === 'http://localhost:4200' ) {
           callback(null, true);
         }
         // otherwise, reject the request
@@ -88,14 +88,14 @@ app.use(function(err, req, res, next) {
     error: {}
   }});
 });
-config.someFunction()
-db.connectDb()
-module.exports.server = sls(app);
+// config.someFunction()
+// db.connectDb()
+// module.exports.server = sls(app);
 
-// var server = app.listen(process.env.PORT || 8080, function(){
-//   console.log('Listening on port harsha calling both fucntions new  ' + server.address().port);
-//    config.someFunction()
-//   db.connectDb()
+var server = app.listen(process.env.PORT || 8080, function(){
+  console.log('Listening on port harsha calling both fucntions new  ' + server.address().port);
+   config.someFunction()
+  db.connectDb()
  
-// });
+});
 
