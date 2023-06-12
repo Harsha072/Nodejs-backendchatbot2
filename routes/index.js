@@ -167,6 +167,7 @@ const presentUser = await client.send(new GetItemCommand(params))
    presentUser.Item.loginTime.S = newUser.loginTime
     console.log("updated",presentUser.Item.totalLogin.N)
     console.log("updated time",presentUser.Item.loginTime.S)  
+    console.log("table name ", users);
    try {
        
     const params = {
@@ -179,7 +180,7 @@ const presentUser = await client.send(new GetItemCommand(params))
       ReturnValues: "ALL_NEW"
     };
     const data = await client.send(new UpdateItemCommand(params));
-    console.log("Item updated:", req.session);
+    console.log("Item updated:", data);
     req.session.users = {
       id: data.Attributes.id.S,
       name: data.Attributes.username.S,

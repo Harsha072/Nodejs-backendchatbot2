@@ -20,7 +20,7 @@ var express = require('express'),
       resave: false,
       saveUninitialized: true,
       cookie: {
-        maxAge: 180000 // 3 minutes in milliseconds
+        maxAge: 1200000// 3 minutes in milliseconds
       }
     });
     app.use(sessionMiddleware);
